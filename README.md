@@ -82,6 +82,62 @@ $simotel->eventApi()->dispatch($eventName,$simotelEventApiData);
 
 
 
+## Simotel Smart Api
+```php
+
+use Hsy\Simotel\Simotel;
+use Hsy\Simotel\SimotelSmartApi\SmartApiCommands;
+
+$config = [
+    'smartApi' => [
+        'appClasses' => [
+            'playWelcomeMessage' => PlayWelcomeMessage::class,
+            '*'      => RestOfApps::class,
+        ],
+    ],
+];
+
+class PlayWelcomeMessage
+{
+    use SmartApiCommands;
+    
+    public function playAnnounceApp($appData)
+    {
+        $this->cmdPlayAnnouncement("announcement file name");
+        return $this->okResponse();
+    }
+}
+
+class RestOfApps
+{
+    use SmartApiCommands;
+    
+    public function sayClock($appData)
+    {
+        $this->cmdSayClock("22:00");
+        return $this->okResponse();
+    }
+}
+
+
+
+// place this codes where you want grab income requests
+// from simotel smartApi calls     
+$simotel = new Simotel($this->config);
+$appData = $_POST["app_data"];
+$response = $simotel->smartApiCall($appData)->toJson();
+echo $response;
+
+// if app_name='playAnnounceApp' 
+// response = {'ok':1,'commands':'PlayAnnouncement('announcement file name')'}
+
+
+// if app_name='sayClock' 
+// response = {'ok':1,'commands':'SayClock('14:00')}
+
+
+
+```
 
 
 
