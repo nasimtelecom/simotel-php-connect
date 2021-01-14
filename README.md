@@ -83,9 +83,10 @@ $simotel->eventApi()->dispatch($eventName,$simotelEventApiData);
 
 
 ## Simotel Smart Api
+
+1. create smartApp classes and methods that called by smart api apps
 ```php
 
-use Hsy\Simotel\Simotel;
 use Hsy\Simotel\SimotelSmartApi\SmartApiCommands;
 
 
@@ -123,14 +124,11 @@ class RestOfApps
     }
 }
 
+```
 
+2. handle received request from simotel smart api
 
-$config = [
-    '' => [
-        '' => 
-    ],
-];
-
+```php
 $config = Simotel::getDefaultConfig();
 $config["smartApi"]["appClasses"] = [
   'playWelcomeMessage' => PlayWelcomeMessage::class,
@@ -141,8 +139,10 @@ $config["smartApi"]["appClasses"] = [
 // from simotel smartApi calls     
 $simotel = new Simotel($config);
 $appData = $_POST["app_data"];
-$response = $simotel->smartApiCall($appData)->toJson();
-echo $response;
+$jsonResponse = $simotel->smartApiCall($appData)->toJson();
+$arrayResponse = $simotel->smartApiCall($appData)->toArray();
+
+echo $jsonResponse;
 
 // if app_name='playAnnounceApp' 
 // response = {'ok':1,'commands':'PlayAnnouncement('announcement file name')'}
