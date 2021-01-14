@@ -145,7 +145,7 @@ echo $response;
 // response = {'ok':1,'commands':'PlayAnnouncement('announcement file name')'}
 
 // if app_name='sayClock' 
-// response = {'ok':1,'commands':'SayClock('14:00')}
+// response = {'ok':1,'commands':'SayClock("14:00")'}
 
 // if app_name='interactiveApp' 
 // if data=1 
