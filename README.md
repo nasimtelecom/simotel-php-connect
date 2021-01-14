@@ -130,7 +130,7 @@ class RestOfApps
 ```
 
 
-there is all commands you can use in smartApp class
+there is all commands you can use in smartApp class:
 
 ```php
 cmdPlayAnnouncement($file);
@@ -144,7 +144,7 @@ cmdSayDate($date,$calender);
 cmdSayDuration($duration);
 cmdSetExten($exten);
 cmdSetLimitOnCall($seconds);
-MusicOnHold();
+cmdMusicOnHold();
 ```
 
 2. handle received request from simotel smart api
