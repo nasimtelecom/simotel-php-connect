@@ -11,7 +11,7 @@ Keep connected with simotel by php
 - [Simotel Event Api](#simotel-event-api)
 - [Smart Api](#smart-api)
 
-## نصب
+## Install
 
 use composer to install and autoload the package
 ```
@@ -55,11 +55,10 @@ $simotel->connect()->pbx()->users()->create($parameters);
 ## Simotel Event Api
 
 
-Add listeners for events
+1.Add listeners for events
 
 ```php
 
-use \Hsy\Simotel\Simotel;
 
 $simotel = new Simotel();
 
@@ -69,7 +68,7 @@ $simotel->eventApi()->addListener('Cdr', function ($simotelApiData) {
 
 ```
 
-dispatch events after receive request from simotel event api
+2.dispatch events after receive request from simotel event api
 
 ```php
 
@@ -81,24 +80,6 @@ $simotel->eventApi()->dispatch($eventName,$simotelEventApiData);
 
 ```
 
-
-
-```php
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use Hsy\SimotelConnect\SimotelEventApi;
-use Illuminate\Http\Request;
-
-class SeaController extends Controller
-{
-    public function dispatchEvent(Request $request)
-    {
-        $simotelEventApi = new  SimotelEventApi;
-        $simotelEventApi->dispatchSimotelEvent($request->all());
-    }
-}
-```
 
 
 
