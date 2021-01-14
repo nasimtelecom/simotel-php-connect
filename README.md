@@ -85,6 +85,9 @@ $simotel->eventApi()->dispatch($eventName,$simotelEventApiData);
 ## Simotel Smart Api
 
 1. create smartApp classes and methods that called by smart api apps
+
+**Don't forget to import SmartApiCommands trait**
+
 ```php
 
 use Hsy\Simotel\SimotelSmartApi\SmartApiCommands;
@@ -124,6 +127,24 @@ class RestOfApps
     }
 }
 
+```
+
+
+there is all commands you can use in smartApp class
+
+```php
+cmdPlayAnnouncement($file);
+cmdPlayback($file);
+cmdExit($exit);
+cmdGetData($file,$timeout,$digitsCount);
+cmdSayDigit($number);
+cmdSayNumber($number);
+cmdSayClock($clock);
+cmdSayDate($date,$calender);
+cmdSayDuration($duration);
+cmdSetExten($exten);
+cmdSetLimitOnCall($seconds);
+MusicOnHold();
 ```
 
 2. handle received request from simotel smart api
