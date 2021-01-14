@@ -126,12 +126,15 @@ class RestOfApps
 
 
 $config = [
-    'smartApi' => [
-        'appClasses' => [
-            'playWelcomeMessage' => PlayWelcomeMessage::class,
-            '*'      => RestOfApps::class,
-        ],
+    '' => [
+        '' => 
     ],
+];
+
+$config = Simotel::getDefaultConfig();
+$config["smartApi"]["appClasses"] = [
+  'playWelcomeMessage' => PlayWelcomeMessage::class,
+  '*' => RestOfApps::class,
 ];
 
 // place this codes where you want grab income requests
