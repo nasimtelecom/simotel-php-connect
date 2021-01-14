@@ -15,7 +15,7 @@ Keep connected with simotel by php
 
 use composer to install and autoload the package
 ```
-composer require hsyir/simotel-php-connect
+composer require nasimtelecom/simotel-php-connect
 ```
 
 ## Simotel Api
