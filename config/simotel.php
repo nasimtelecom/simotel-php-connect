@@ -3,7 +3,22 @@
 return [
     'smartApi' => [
         'apps' => [
-            '*' => "\App\Simotel\SmartApiApps",
+            '*' => "\App\Simotel\SmartApiApp",
+        ],
+    ],
+    'ivrApi' => [
+        'apps' => [
+            '*' => "\App\Simotel\IvrApiApp",
+        ],
+    ],
+    'trunkApi' => [
+        'apps' => [
+            '*' => "\App\Simotel\TrunkApiApp",
+        ],
+    ],
+    'extensionApi' => [
+        'apps' => [
+            '*' => "\App\Simotel\ExtensionApiApp",
         ],
     ],
     'simotelApi' => [
@@ -408,5 +423,4 @@ secret=as#3591011020',
 
         ],
     ],
-
 ];

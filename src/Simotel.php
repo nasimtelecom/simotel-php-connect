@@ -36,8 +36,37 @@ class Simotel
     public function smartApiCall($data)
     {
         $smartApi = new SmartApi($this->config['smartApi'] ?? []);
-
         return $smartApi->call($data);
+    }
+
+    /**
+     * @param $data
+     * @return bool|IvrApi
+     */
+    public function ivrApiCall($data)
+    {
+        $ivrApi = new IvrApi($this->config['ivrApi'] ?? []);
+
+        return $ivrApi->call($data);
+    }
+    /**
+     * @param $data
+     * @return bool|ExtensionApi
+     */
+    public function extensionApiCall($data)
+    {
+        $ivrApi = new ExtensionApi($this->config['extensionApi'] ?? []);
+        return $ivrApi->call($data);
+    }
+
+    /**
+     * @param $data
+     * @return bool|TrunkApi
+     */
+    public function trunkApiCall($data)
+    {
+        $ivrApi = new TrunkApi($this->config['trunkApi'] ?? []);
+        return $ivrApi->call($data);
     }
 
     /**

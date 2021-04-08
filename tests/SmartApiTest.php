@@ -9,7 +9,7 @@ class SmartApiTest extends TestCase
 {
     private $config = [
         'smartApi' => [
-            'appClasses' => [
+            'apps' => [
                 'fooApp' => FooSmartApi::class,
                 '*'      => RestOfApps::class,
             ],

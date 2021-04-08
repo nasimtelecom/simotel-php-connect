@@ -2,15 +2,14 @@
 
 namespace Hsy\Simotel;
 
-class SmartApi
+class TrunkApi
 {
     private $config;
     private $errorMessage;
-    private $response;
 
-    public function __construct(array $smartApiConfig = [])
+    public function __construct(array $trunkApiConfig = [])
     {
-        $this->config = $smartApiConfig;
+        $this->config = $trunkApiConfig;
     }
 
     /**
@@ -22,7 +21,7 @@ class SmartApi
     {
         $appName = $data['app_name'] ?? '';
         if (!$appName) {
-            return $this->fail("SmartApi data has not 'app_name' index");
+            return $this->fail("trunkApi data has not 'app_name' index");
         }
 
         $className = $this->findAppClass($appName);
@@ -35,12 +34,18 @@ class SmartApi
             return $this->fail("Responsible method for app name not found in '{$className}' ");
         }
 
-        $response = $class->$appName($data);
-        if (!is_array($response)) {
-            return $this->fail('Returned data must be array');
+        $trunk = $class->$appName($data);
+        if (!is_array($trunk)) {
+            return $this->fail('Returned data must be type of array');
         }
 
-        $this->response = $response;
+        $this->response = [
+            "ok" => "1",
+            "trunk" => $trunk["trunk"],
+            "extension" => $trunk["extension"],
+            "call_limit" => $trunk["call_limit"],
+        ];
+
         return $this;
     }
 
@@ -67,7 +72,7 @@ class SmartApi
     private function findAppClass($appName)
     {
         if (!isset($this->config['apps'])) {
-            return $this->fail("'appClasses' not defined in config");
+            return $this->fail("'apps' not defined in config");
         }
 
         $appClasses = $this->config['apps'];

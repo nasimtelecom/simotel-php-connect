@@ -2,15 +2,14 @@
 
 namespace Hsy\Simotel;
 
-class SmartApi
+class IvrApi
 {
     private $config;
     private $errorMessage;
-    private $response;
 
-    public function __construct(array $smartApiConfig = [])
+    public function __construct(array $ivrApiConfig = [])
     {
-        $this->config = $smartApiConfig;
+        $this->config = $ivrApiConfig;
     }
 
     /**
@@ -22,7 +21,7 @@ class SmartApi
     {
         $appName = $data['app_name'] ?? '';
         if (!$appName) {
-            return $this->fail("SmartApi data has not 'app_name' index");
+            return $this->fail("IvrApi data has not 'app_name' index");
         }
 
         $className = $this->findAppClass($appName);
@@ -35,12 +34,16 @@ class SmartApi
             return $this->fail("Responsible method for app name not found in '{$className}' ");
         }
 
-        $response = $class->$appName($data);
-        if (!is_array($response)) {
-            return $this->fail('Returned data must be array');
+        $case = $class->$appName($data);
+        if (!is_string($case)) {
+            return $this->fail('Returned data must be type of string');
         }
 
-        $this->response = $response;
+        $this->response = [
+            "ok" => "1",
+            "case" => $case
+        ];
+
         return $this;
     }
 
@@ -67,7 +70,7 @@ class SmartApi
     private function findAppClass($appName)
     {
         if (!isset($this->config['apps'])) {
-            return $this->fail("'appClasses' not defined in config");
+            return $this->fail("'apps' not defined in config");
         }
 
         $appClasses = $this->config['apps'];
