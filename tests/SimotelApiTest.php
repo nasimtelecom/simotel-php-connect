@@ -59,35 +59,45 @@ class SimotelApiTest extends TestCase
 
     public function testAllMethods()
     {
+
+
         $namespaces = [
             'pbx' => [
-                'Users'         => ['create', 'update', 'search', 'remove'],
-                'Trunks'        => ['create', 'update', 'search', 'remove'],
-                'Queues'        => ['create', 'update', 'search', 'remove', 'addAgent', 'removeAgent', 'pauseAgent', 'resumeAgent'],
-                'blacklists'    => ['add', 'update', 'search', 'remove'],
-                'whitelists'    => ['add', 'update', 'search', 'remove'],
-                'announcements' => ['upload', 'add', 'update', 'search', 'remove'],
-                'musicOnHolds'  => ['search'],
-                'faxes'         => ['upload', 'add', 'search', 'download'],
+                'users' => ['add','update','remove','search'],
+                'trunks' => ['add','update','remove','search'],
+                'queues' => ['add','update','remove','search','addagent','removeagent','pauseagent','resumeagent'],
+                'blacklists' => ['add','update','remove','search'],
+                'whitelists' => ['add','update','remove','search'],
+                'announcements' => ['upload','add','update','remove','search'],
+                'musicOnHolds' => ['search'],
+                'faxes' => ['upload','add','search','download'],
             ],
             'call' => [
                 'originate' => ['act'],
             ],
             'voicemails' => [
-                'voicemails' => ['add', 'update', 'remove', 'search'],
-                'inbox'      => ['read', 'search'],
+                'voicemails' => ['add','update','remove','search'],
+                'audio' => ['download'],
+                'inbox' => ['search'],
             ],
             'reports' => [
-                'quick' => ['search', 'info', 'cdr'],
+                'quick' => ['search','info'],
+                'audio' => ['download'],
+                'cdr' => ['search'],
+                'queue' => ['search'],
+                'queueDetails' => ['search'],
+                'agent' => ['search'],
+                'poll' => ['search'],
             ],
             'autodialer' => [
-                'announcements' => ['upload', 'add', 'update', 'remove', 'search'],
-                'campaigns'     => ['add', 'update', 'remove', 'search'],
-                'contacts'      => ['add', 'update', 'remove', 'search'],
-                'groups'        => ['upload', 'add', 'update', 'remove', 'search'],
-                'reports'       => ['info', 'search'],
-                'trunks'        => ['update', 'search'],
+                'announcements' => ['upload','add','update','remove','search'],
+                'campaigns' => ['add','update','remove','search'],
+                'contacts' => ['add','update','remove','search'],
+                'groups' => ['upload','add','update','remove','search'],
+                'reports' => ['search','info'],
+                'trunks' => ['update','search'],
             ],
+
         ];
 
         foreach ($namespaces as $namespace => $groups) {
