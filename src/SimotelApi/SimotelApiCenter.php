@@ -18,13 +18,13 @@ class SimotelApiCenter extends Simotel
     /**
      * SimotelApiCenter constructor.
      *
-     * @param array|null  $config
+     * @param array|null $config
      * @param Client|null $client
      */
     public function __construct(array $config = null, Client $client = null)
     {
         $this->setConfig($config);
-        $this->client = $client ?: $this->makeHttpClient();
+        $this->client = $client ?: $this->createHttpClient();
 
         parent::__construct();
     }
@@ -53,29 +53,27 @@ class SimotelApiCenter extends Simotel
         ];
     }
 
+
     /**
      * @param $uri
-     * @param array  $requestBody
+     * @param array $requestBody
      * @param string $method
-     *
+     * @return \Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @return bool|string
      */
     protected function sendRequest($uri, $requestBody = [], $method = 'POST')
     {
         $options = $this->makeHttpRequestOptions();
         $options['json'] = $requestBody;
 
-        $response = $this->client->request($method, $uri, $options);
+        return $this->client->request($method, $uri, $options);
 
-        return new Response($response);
     }
 
     /**
      * @return Client
      */
-    protected function makeHttpClient()
+    protected function createHttpClient()
     {
         return new Client([
             'base_uri' => $this->config['connect']['server_address'],
@@ -112,6 +110,6 @@ class SimotelApiCenter extends Simotel
      */
     protected function makeConfigKey($methodName)
     {
-        return $this->apiAddressConfigPrefix.$methodName;
+        return $this->apiAddressConfigPrefix . $methodName;
     }
 }
