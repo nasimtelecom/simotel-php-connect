@@ -47,7 +47,7 @@ $parameters->name = "user name";
 $parameters->number = "101";
 $parameters->secret = "password";
 
-$simotel->connect()->pbx()->users()->create($parameters);
+$simotel->connect()->pbx()->users()->add($parameters);
 ```
 
 
